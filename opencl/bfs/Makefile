@@ -21,7 +21,7 @@ SRC = bfs.cpp timer.cc ../util/timing.c
 
 CC_FLAGS = -g -O3
 
-EXE = bfs.out
+EXE = bfs
 
 release:$(SRC)
 	$(CC) $(CC_FLAGS)  -fopenmp $(SRC) -o $(EXE) -I$(OPENCL_INC) -L$(OPENCL_LIB) -lOpenCL -Wno-unused-result -I../util -DTIMING

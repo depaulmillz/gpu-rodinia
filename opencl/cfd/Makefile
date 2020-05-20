@@ -18,7 +18,7 @@ CC = g++
 FLAGS = -O3
 SRC = euler3d.cpp ../util/timing.c
 
-EXE = euler3d.out
+EXE = euler3d
 
 release:$(SRC)
 	$(CC) $(KERNEL_DIM) $(SRC) -o $(EXE) -I$(OPENCL_INC) -L$(OPENCL_LIB) -lOpenCL -I../util -DTIMING $(FLAGS)

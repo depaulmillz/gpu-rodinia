@@ -58,6 +58,7 @@ b+tree.out:	./main.o \
 			-L$(OPENCL_LIB) \
 			-lOpenCL \
 	                -o b+tree.out
+	cp b+tree.out b+tree
 
 run: b+tree.out
 	./b+tree.out file ../../data/b+tree/mil.txt command ../../data/b+tree/command.txt -p 0 -d 0

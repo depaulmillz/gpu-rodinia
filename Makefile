@@ -10,9 +10,10 @@ CUDA_DIRS := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte
 OMP_DIRS  := backprop bfs cfd		   heartwall hotspot kmeans lavaMD leukocyte lud nn nw srad streamcluster particlefilter pathfinder mummergpu
 OCL_DIRS  := backprop bfs cfd gaussian heartwall hotspot kmeans lavaMD leukocyte lud nn	nw srad streamcluster particlefilter pathfinder
 
-all: CUDA OMP OPENCL
+all: CUDA OPENCL #OMP
 
 CUDA: 
+	mkdir -p bin/linux/cuda
 	cd cuda/backprop;		make;	cp backprop $(CUDA_BIN_DIR)
 	cd cuda/bfs;			make;	cp bfs $(CUDA_BIN_DIR)
 	cd cuda/cfd;			make;	cp euler3d euler3d_double pre_euler3d pre_euler3d_double $(CUDA_BIN_DIR)
@@ -36,6 +37,7 @@ CUDA:
 	
 	
 OMP:
+	mkdir -p bin/linux/omp
 	cd openmp/backprop;				make;	cp backprop $(OMP_BIN_DIR)
 	cd openmp/bfs;					make;	cp bfs $(OMP_BIN_DIR)
 	cd openmp/cfd;					make;	cp euler3d_cpu euler3d_cpu_double pre_euler3d_cpu pre_euler3d_cpu_double $(OMP_BIN_DIR)
@@ -55,6 +57,7 @@ OMP:
 	cd openmp/mummergpu;				make;	cp bin/mummergpu $(OMP_BIN_DIR)
 
 OPENCL:
+	mkdir -p bin/linux/opencl
 	cd opencl/backprop;			make;	cp backprop     $(OPENCL_BIN_DIR)
 	cd opencl/bfs;				make;	cp bfs		$(OPENCL_BIN_DIR)
 	cd opencl/b+tree;			make;	cp b+tree	$(OPENCL_BIN_DIR)
