@@ -9,6 +9,8 @@ data/*
 *.cpp_o
 *.cu_o
 
+*.a
+
 /cuda/backprop/backprop
 /cuda/bfs/bfs
 /cuda/b+tree/b+tree
