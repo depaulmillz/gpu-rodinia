@@ -11,6 +11,8 @@ data/*
 
 *.a
 
+/build
+
 /cuda/backprop/backprop
 /cuda/bfs/bfs
 /cuda/b+tree/b+tree
