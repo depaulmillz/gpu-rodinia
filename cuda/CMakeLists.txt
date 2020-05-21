@@ -1,12 +1,13 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.10)
 
 project(Rodinia-CUDA LANGUAGES CXX CUDA)
 
-add_custom_target(backprop COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/backprop)
-add_custom_target(bfs COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bfs)
-add_custom_target(cfd COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/cfd)
-add_custom_target(gaussian COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/gaussian)
-add_custom_target(heartwall COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/heartwall)
+add_subdirectory(backprop)
+add_subdirectory(bfs)
+add_subdirectory(cfd)
+add_subdirectory(gaussian)
+add_subdirectory(heartwall)
+
 add_custom_target(hotspot COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/hotspot)
 add_custom_target(kmeans COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/kmeans)
 add_custom_target(lavaMD COMMAND make WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lavaMD)
