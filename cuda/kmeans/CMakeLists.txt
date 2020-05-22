@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Backprop LANGUAGES CXX CUDA C)
+project(KMeans LANGUAGES CUDA C)
 
 message("BUILD TYPE: ${CMAKE_BUILD_TYPE}")
 
@@ -21,6 +21,4 @@ endif(NOT DEFINED CUDA_ARCH)
 
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
-string(APPEND CMAKE_C_FLAGS " -fPIC")
-
-add_executable(backprop backprop.c facetrain.c imagenet.c backprop_cuda.cu)
+add_executable(kmeans cluster.c getopt.c kmeans.c kmeans_clustering.c kmeans_cuda.cu rmse.c) 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Backprop LANGUAGES CXX CUDA C)
+project(ParticleFilter LANGUAGES CUDA CXX)
 
 message("BUILD TYPE: ${CMAKE_BUILD_TYPE}")
 
@@ -21,6 +21,5 @@ endif(NOT DEFINED CUDA_ARCH)
 
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
-string(APPEND CMAKE_C_FLAGS " -fPIC")
-
-add_executable(backprop backprop.c facetrain.c imagenet.c backprop_cuda.cu)
+add_executable(naive ex_particle_CUDA_naive_seq.cu) 
+add_executable(float ex_particle_CUDA_float_seq.cu) 

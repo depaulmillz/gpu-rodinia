@@ -21,8 +21,6 @@ endif(NOT DEFINED CUDA_ARCH)
 
 add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
-message("SDK ROOT DIR ${CUDA_PATH} ${CUDA_TOOLKIT_ROOT_DIR}")
-
 add_executable(heartwall main.cu AVI/avilib.c ./AVI/avimod.c) 
 
 target_include_directories(heartwall PUBLIC AVI)

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(Backprop LANGUAGES CXX CUDA C)
+project(NN LANGUAGES CUDA C)
 
 message("BUILD TYPE: ${CMAKE_BUILD_TYPE}")
 
@@ -19,8 +19,9 @@ if(NOT DEFINED CUDA_ARCH)
     message("WARNING CUDA_ARCH IS BEING SET TO DEFAULT ${CUDA_ARCH}")
 endif(NOT DEFINED CUDA_ARCH)
 
-add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
+#add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
-string(APPEND CMAKE_C_FLAGS " -fPIC")
+add_executable(nn nn_cuda.cu) 
+add_executable(hurricane_gen hurricane_gen.c)
 
-add_executable(backprop backprop.c facetrain.c imagenet.c backprop_cuda.cu)
+target_include_directories(nn PUBLIC ../util)
