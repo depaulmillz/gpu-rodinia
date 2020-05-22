@@ -8,6 +8,7 @@
  */
 
 #include "backprop.h"
+#include <assert.h>
 #include <fcntl.h>
 #include <math.h>
 #include <omp.h>
@@ -15,6 +16,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <unistd.h>
+
 
 //#define OPEN
 
@@ -111,7 +113,7 @@ void bpnn_zero_weights(float **w, int m, int n) {
   }
 }
 
-void bpnn_initialize(seed) {
+void bpnn_initialize(int seed) {
   printf("Random number generator seed: %d\n", seed);
   srand(seed);
 }
@@ -267,9 +269,8 @@ int nh, no;
   *err = errsum;
 }
 
-void bpnn_adjust_weights(delta, ndelta, ly, nly, w, oldw) float *delta, *ly,
-    **w, **oldw;
-{
+void bpnn_adjust_weights(float *delta, int ndelta, float *ly, int nly,
+                         float **w, float **oldw) {
   float new_dw;
   int k, j;
   ly[0] = 1.0;
@@ -413,9 +414,9 @@ BPNN *bpnn_read(filename) char *filename;
 
   printf("Reading '%s'\n", filename); // fflush(stdout);
 
-  read(fd, (char *)&n1, sizeof(int));
-  read(fd, (char *)&n2, sizeof(int));
-  read(fd, (char *)&n3, sizeof(int));
+  assert(read(fd, (char *)&n1, sizeof(int)) == sizeof(int));
+  assert(read(fd, (char *)&n2, sizeof(int)) == sizeof(int));
+  assert(read(fd, (char *)&n3, sizeof(int)) == sizeof(int));
   new = bpnn_internal_create(n1, n2, n3);
 
   printf("'%s' contains a %dx%dx%d network\n", filename, n1, n2, n3);
@@ -423,7 +424,8 @@ BPNN *bpnn_read(filename) char *filename;
 
   memcnt = 0;
   mem = (char *)malloc((unsigned)((n1 + 1) * (n2 + 1) * sizeof(float)));
-  read(fd, mem, (n1 + 1) * (n2 + 1) * sizeof(float));
+  assert(read(fd, mem, (n1 + 1) * (n2 + 1) * sizeof(float)) ==
+         (n1 + 1) * (n2 + 1) * sizeof(float));
   for (i = 0; i <= n1; i++) {
     for (j = 0; j <= n2; j++) {
       fastcopy(&(new->input_weights[i][j]), &mem[memcnt], sizeof(float));
@@ -436,7 +438,8 @@ BPNN *bpnn_read(filename) char *filename;
 
   memcnt = 0;
   mem = (char *)malloc((unsigned)((n2 + 1) * (n3 + 1) * sizeof(float)));
-  read(fd, mem, (n2 + 1) * (n3 + 1) * sizeof(float));
+  assert(read(fd, mem, (n2 + 1) * (n3 + 1) * sizeof(float)) ==
+         (n2 + 1) * (n3 + 1) * sizeof(float));
   for (i = 0; i <= n2; i++) {
     for (j = 0; j <= n3; j++) {
       fastcopy(&(new->hidden_weights[i][j]), &mem[memcnt], sizeof(float));

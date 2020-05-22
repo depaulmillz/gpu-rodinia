@@ -19,8 +19,6 @@ if(NOT DEFINED CUDA_ARCH)
     message("WARNING CUDA_ARCH IS BEING SET TO DEFAULT ${CUDA_ARCH}")
 endif(NOT DEFINED CUDA_ARCH)
 
-add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
-
 add_executable(bfs bfs.cu)
 
 target_compile_options(bfs PUBLIC -DTIMING)
